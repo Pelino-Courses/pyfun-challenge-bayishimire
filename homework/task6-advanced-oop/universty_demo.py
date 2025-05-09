@@ -10,7 +10,7 @@ from teaching_assistant import TeachingAssistant
 # importing teaching_assistant class
 
 student1 = Student("bayishimiresamuel", "bayishimi samu@gmail.com")
-instructor1 = Instructor("Dr. Pelin", "samuel pelin@gmail.com")
+instructor1 = Instructor("Dr. honor Pelin", "samuelpelin@gmail.com")
 teach_assistant1 = TeachingAssistant("ernest", "ernest@gmail.com")
 
 course1 = Course("Python")
