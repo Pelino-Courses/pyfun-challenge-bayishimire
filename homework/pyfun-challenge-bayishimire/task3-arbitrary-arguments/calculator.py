@@ -1,70 +1,71 @@
 def add(*args):
-#return all sum
+    """Return the sum of all arguments."""
     return sum(args)
 
 def multiply(*args):
-    #return multiplication of all aruguments
+    """Return the product of all arguments."""
     result = 1
-    for num in args:
-        result *= num
+    for arg in args:
+        result *= arg
     return result
 
-def subtraction(*args):
-    # Return the difference of all arguments
+def subtract(*args):
+    """Return the result of subtracting all arguments from the first."""
+    if len(args) == 0:
+        return 0
     result = args[0]
-    for num in args[1:]:
-        result -= num
+    for arg in args[1:]:
+        result -= arg
     return result
 
-def division(*args):
-    #Return the division of all arguments."""
+def divide(*args):
+    """Return the result of dividing the first argument by all subsequent arguments."""
+    if len(args) == 0:
+        return 0
     result = args[0]
-    for num in args[1:]:
-        if num == 0:
-            raise ZeroDivisionError("imposible division zero")
-        result /= num
+    for arg in args[1:]:
+        if arg == 0:
+            raise ValueError("imposible divide by zero")
+        result /= arg
     return result
 
-def calculate(*args, **kwargs):
-#calculation
-    # Check if all args are numbers
+def exponentiate(*args):
+    """Return the result of raising the first argument to the power of all subsequent arguments."""
+    if len(args) == 0:
+        return 1
+    result = args[0]
+    for arg in args[1:]:
+        result **= arg
+    return result
+
+def calculator(*args, **kwargs):
+    """Perform the specified operation on the given arguments."""
     for num in args:
         if not isinstance(num, (int, float)):
-            raise TypeError("All arguments must be numbers")
-    
-    # Ensure at least one argument is provided
+            raise ValueError("All arguments must be numbers")
     if len(args) == 0:
         raise ValueError("At least one argument is required")
-    
-    # Get the operation from kwargs
     operation = kwargs.get("operation")
-    if not operation:
-        raise ValueError("Operation must be specified")
-    
-    # Perform the specified operation
     if operation == "add":
         return add(*args)
     elif operation == "multiply":
         return multiply(*args)
-    elif operation == "subtraction":
-        return subtraction(*args)
-    elif operation == "division":
-        return division(*args)
+    elif operation == "subtract":
+        return subtract(*args)
+    elif operation == "divide":
+        return divide(*args)
+    elif operation == "exponentiate":
+        return exponentiate(*args)
     else:
-        raise ValueError("Invalid operation specified")
+        raise ValueError("Invalid operation")
 
 if __name__ == "__main__":
-    # Test the calculator function
     try:
-        number1=int(input("Enter the first number: "))
-        number2=int(input("Enter the second number: "))
-        number3=int(input("Enter the third number: "))
-        print("Choose an operation: add, multiply, subtraction, division")  
-
-        print(calculate(number1, number2, number3, operation="add"))
-        print(calculate(number1, number2, number3, operation="subtraction"))
-        print(calculate(number1, number2, number3, operation="multiply"))     
-        print(calculate(number1, number2, number3, operation="division"))   
-    except Exception as e:
+        number1 = int(input("Enter the first number: "))
+        number2 = int(input("Enter the second number: "))
+        number3 = int(input("Enter the third number: "))
+        operation = input("Enter the operation (add, subtract, multiply, divide, exponentiate): ")
+        result = calculator(number1, number2, number3, operation=operation)
+        print(f"The result of {operation} is: {result}")
+    except ValueError as e:
         print(f"Error: {e}")
-              
